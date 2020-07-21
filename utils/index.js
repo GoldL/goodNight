@@ -69,7 +69,7 @@ function sendSms (content = '晚安', mobile = '15905992320', appCode = 'fd77c92
  */
 async function todo () {
   const goodNight = await GoodNight.findOne({ where: { status: 1 } })
-  const content = `第${goodNight.id + 1}晚~ ${goodNight.content}`
+  const content = `第${goodNight.id}晚~ ${goodNight.content}`
   sendMail(content)
   goodNight.update({ status: 0 })
 }
