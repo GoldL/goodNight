@@ -17,8 +17,8 @@
       "host": ["120.26.75.227"],
       "port": "39999",
       "ref": "origin/master",
-      "repo": "git@gitee.com:iGolden/island.git",
-      "path": "/www/island/production",
+      "repo": "git@gitee.com:iGolden/goodNight.git",
+      "path": "/www/goodNight/production",
       "ssh_options": "StrictHostKeyChecking=no",
       "post-deploy" : "npm install && pm2 startOrRestart ecosystem.json --env production",
       "env": {
