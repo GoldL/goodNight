@@ -4,7 +4,7 @@ module.exports = {
     pass: 'hzcglgnuxgkqbiaa'
   },
   database: {
-    dbName: 'good-night',
+    dbName: 'goodnight',
     host: 'localhost',
     port: 3306,
     user: 'root',
