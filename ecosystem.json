@@ -1,0 +1,29 @@
+{
+  "apps": [
+    {
+      "name": "goodNight",
+      "script": "app.js",
+      "env": {
+        "COMMON_VARIABLE": "true"
+      },
+      "env_production": {
+        "NODE_ENV": "production"
+      }
+    }
+  ],
+  "deploy": {
+    "production": {
+      "user": "manager",
+      "host": ["120.26.75.227"],
+      "port": "39999",
+      "ref": "origin/master",
+      "repo": "git@gitee.com:iGolden/island.git",
+      "path": "/www/island/production",
+      "ssh_options": "StrictHostKeyChecking=no",
+      "post-deploy" : "npm install && pm2 startOrRestart ecosystem.json --env production",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  }
+}
