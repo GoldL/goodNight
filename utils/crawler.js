@@ -42,7 +42,7 @@ function crawler (url, callback) {
 //   })
 // })
 
-const url = 'https://zhuanlan.zhihu.com/p/99190251'
+const url = 'https://zhuanlan.zhihu.com/p/148211031'
 
 crawler(url, html => {
   if (!html) {
@@ -60,7 +60,7 @@ crawler(url, html => {
         text += '   晚安！'
       }
       try {
-        let goodNight = await GoodNight.findOne({ where: { id: i + 7 } })
+        let goodNight = await GoodNight.findOne({ where: { id: i + 27 } })
         await goodNight.update({ content: text })
       } catch (e) {
         console.log(i, e)
