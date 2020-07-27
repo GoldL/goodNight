@@ -1,8 +1,10 @@
 const https = require('https')
 const cheerio = require('cheerio')
-const { GoodNight } = require('./goodNightModel')
+const {
+  GoodNight
+} = require('./goodNightModel')
 
-function crawler (url, callback) {
+function crawler(url, callback) {
   https.get(url, (res => {
     let data = ''
     res.on('data', chunk => {
@@ -51,11 +53,15 @@ crawler(url, html => {
   }
   const $ = cheerio.load(html)
   $('p', '.Post-RichText').each(async (i, e) => {
-    console.log(i)
     const el = $(e)
     let text = el.text()
-    if (text.includes('.')) {
-      text = text.split('.')[1]
+    if (text.includes('.') || text.includes('．')) {
+      if (text.includes('.')) {
+        text = text.split('.')[1]
+      }
+      if (text.includes('．')) {
+        text = text.split('．')[1]
+      }
       if (!text.includes('晚安')) {
         text += '   晚安！'
       }
