@@ -4,7 +4,7 @@ const { todo } = require('./utils/index')
 const Koa = require('koa')
 const app = new Koa()
 
-new CronJob('00 30 23 * * *', () => {
+new CronJob('00 30 22 * * *', () => {
   todo()
 }, null, true, 'Asia/Shanghai')
 
