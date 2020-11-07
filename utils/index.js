@@ -21,9 +21,9 @@ const transporter = nodemailer.createTransport({
  * @param {*} text 邮件文本内容
  * @param {*} html 邮件富文本
  */
-function sendMail (text = '晚安', to = '1525922633@qq.com,760532048@qq.com', subject = '【晚安计划】每天和你说一句晚安', html = '') {
+function sendMail (text = '晚安', to = '1525922633@qq.com,760532048@qq.com,136895062@qq.com', subject = '【晚安计划】每天和你说一句晚安', html = '') {
   const mailOptions = {
-    from: '"Guess who I am." <136895062@qq.com>',
+    from: '"say I love you." <136895062@qq.com>',
     to,
     subject,
     text,

@@ -44,7 +44,7 @@ function crawler(url, callback) {
 //   })
 // })
 
-const url = 'https://zhuanlan.zhihu.com/p/148211031'
+const url = 'https://zhuanlan.zhihu.com/p/37383553'
 
 crawler(url, html => {
   if (!html) {
@@ -65,9 +65,15 @@ crawler(url, html => {
       if (!text.includes('晚安')) {
         text += '   晚安！'
       }
+      console.log(text)
       try {
-        let goodNight = await GoodNight.findOne({ where: { id: i + 27 } })
-        await goodNight.update({ content: text })
+        let goodNight = await GoodNight.findOne({ where: { id: i + 110 } })
+        if (!goodNight) {
+          const goodNight = { content: text }
+          await GoodNight.create(goodNight)
+        } else {
+          await goodNight.update({ content: text })
+        }
       } catch (e) {
         console.log(i, e)
       }
