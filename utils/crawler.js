@@ -81,7 +81,7 @@ function crawler(url, callback) {
 //   })
 // })
 
-const url = 'https://www.zhihu.com/question/360859696/answer/1487745111'
+const url = 'https://www.zhihu.com/question/360859696/answer/1487695654'
 
 crawler(url, html => {
   if (!html) {
@@ -92,16 +92,14 @@ crawler(url, html => {
   $('blockquote', '.RichContent-inner').each(async (i, e) => {
     const el = $(e)
     let text = el.text()
-    if (text.includes('.')) {
-      if (!text.includes('晚安')) {
-        text += '   晚安！'
-      }
-      try {
-        const goodNight = { content: text }
-        await GoodNight.create(goodNight)
-      } catch (e) {
-        console.log(i, e)
-      }
+    if (!text.includes('晚安')) {
+      text += '   晚安！'
+    }
+    try {
+      const goodNight = { content: text }
+      await GoodNight.create(goodNight)
+    } catch (e) {
+      console.log(i, e)
     }
   })
 })
