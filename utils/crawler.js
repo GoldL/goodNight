@@ -1,21 +1,21 @@
 const https = require('https')
 const cheerio = require('cheerio')
-const {
-  GoodNight
-} = require('./goodNightModel')
+const { GoodNight } = require('./goodNightModel')
 
 function crawler(url, callback) {
-  https.get(url, (res => {
-    let data = ''
-    res.on('data', chunk => {
-      data += chunk
+  https
+    .get(url, res => {
+      let data = ''
+      res.on('data', chunk => {
+        data += chunk
+      })
+      res.on('end', () => {
+        callback(data)
+      })
     })
-    res.on('end', () => {
-      callback(data)
+    .on('error', () => {
+      callback(null)
     })
-  })).on('error', () => {
-    callback(null)
-  })
 }
 
 // const url = 'https://baijiahao.baidu.com/s?id=1600401539542362481&wfr=spider&for=pc'
@@ -81,7 +81,7 @@ function crawler(url, callback) {
 //   })
 // })
 
-const url = 'https://www.zhihu.com/question/360859696/answer/1487695654'
+const url = 'https://www.zhihu.com/question/418404539/answer/1497205251'
 
 crawler(url, html => {
   if (!html) {
@@ -89,17 +89,22 @@ crawler(url, html => {
     return
   }
   const $ = cheerio.load(html)
-  $('blockquote', '.RichContent-inner').each(async (i, e) => {
+  $('p', '.RichContent-inner').each(async (i, e) => {
     const el = $(e)
     let text = el.text()
-    if (!text.includes('晚安')) {
-      text += '   晚安！'
-    }
-    try {
-      const goodNight = { content: text }
-      await GoodNight.create(goodNight)
-    } catch (e) {
-      console.log(i, e)
+    if (text.includes('.') && text.split('.')[0] < 86) {
+      if (text.includes('.')) {
+        text = text.split('.')[1]
+      }
+      if (!text.includes('晚安')) {
+        text += '   晚安！'
+      }
+      try {
+        const goodNight = { content: text }
+        await GoodNight.create(goodNight)
+      } catch (e) {
+        console.log(i, e)
+      }
     }
   })
 })
