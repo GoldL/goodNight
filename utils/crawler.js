@@ -81,7 +81,7 @@ function crawler(url, callback) {
 //   })
 // })
 
-const url = 'https://zhuanlan.zhihu.com/p/135380971'
+const url = 'https://www.zhihu.com/question/350859495/answer/1546488679'
 
 crawler(url, html => {
   if (!html) {
@@ -89,7 +89,7 @@ crawler(url, html => {
     return
   }
   const $ = cheerio.load(html)
-  $('p', '.Post-RichText').each(async (i, e) => {
+  $('p', '.RichContent-inner').each(async (i, e) => {
     const el = $(e)
     let text = el.text()
     if (text.includes('.')) {
