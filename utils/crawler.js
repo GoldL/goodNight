@@ -81,7 +81,7 @@ function crawler(url, callback) {
 //   })
 // })
 
-const url = 'https://www.zhihu.com/question/418404539/answer/1497205251'
+const url = 'https://zhuanlan.zhihu.com/p/135380971'
 
 crawler(url, html => {
   if (!html) {
@@ -89,10 +89,10 @@ crawler(url, html => {
     return
   }
   const $ = cheerio.load(html)
-  $('p', '.RichContent-inner').each(async (i, e) => {
+  $('p', '.Post-RichText').each(async (i, e) => {
     const el = $(e)
     let text = el.text()
-    if (text.includes('.') && text.split('.')[0] < 86) {
+    if (text.includes('.')) {
       if (text.includes('.')) {
         text = text.split('.')[1]
       }
